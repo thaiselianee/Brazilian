@@ -1156,6 +1156,12 @@ document.addEventListener(
 
         let isSubmittingQuestionnaire = false;
 
+        /* =====================================================
+        LEAD ID
+        ===================================================== */
+
+        let leadId = sessionStorage.getItem("brazilians_lead_id") || "";
+
 
         /* =====================================================
            ERRO DA ETAPA 1
@@ -1559,62 +1565,53 @@ document.addEventListener(
         }
 
 
-        /* =====================================================
-           CAPTURA DAS UTMs
+       /* =====================================================
+        CAPTURA DAS UTMs
         ===================================================== */
 
         function getUTMs() {
 
-            const params =
-                new URLSearchParams(
-                    window.location.search
-                );
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
 
-            return {
+    return {
 
-                utm_source:
-                    params.get(
-                        "utm_source"
-                    ) || "",
+        utm_source:
+            params.get("utm_source") || "",
 
+        utm_medium:
+            params.get("utm_medium") || "",
 
-                utm_medium:
-                    params.get(
-                        "utm_medium"
-                    ) || "",
+        utm_campaign:
+            params.get("utm_campaign") || "",
 
+        utm_content:
+            params.get("utm_content") || "",
 
-                utm_campaign:
-                    params.get(
-                        "utm_campaign"
-                    ) || "",
+        utm_term:
+            params.get("utm_term") || "",
 
+        utm_site:
+            params.get("utm_site") || "",
 
-                utm_content:
-                    params.get(
-                        "utm_content"
-                    ) || "",
+        utm_id:
+            params.get("utm_id") || "",
 
+        fbclid:
+            params.get("fbclid") || "",
 
-                utm_term:
-                    params.get(
-                        "utm_term"
-                    ) || "",
+        gclid:
+            params.get("gclid") || ""
 
+    };
 
-                utm_site:
-                    params.get(
-                        "utm_site"
-                    ) || ""
-
-            };
-
-        }
-
+}
 
         /* =====================================================
-           ENVIO DOS DADOS INICIAIS
+        ENVIO DOS DADOS INICIAIS
         ===================================================== */
 
         async function enviarDadosIniciais() {
@@ -1705,10 +1702,73 @@ document.addEventListener(
             }
 
 
+            /* =============================================
+            TENTA LER O ID DEVOLVIDO PELO WEBHOOK
+            ============================================= */
+
+            let respostaWebhook = null;
+
+            try {
+
+                respostaWebhook =
+                    await response.json();
+
+            } catch (error) {
+
+                console.warn(
+                    "O webhook não retornou JSON.",
+                    error
+                );
+
+            }
+
+
+            /* =============================================
+            PROCURA O LEAD ID NA RESPOSTA
+            ============================================= */
+
+            const novoLeadId =
+                respostaWebhook?.lead_id ??
+                respostaWebhook?.leadId ??
+                respostaWebhook?.id ??
+                respostaWebhook?.ID ??
+                respostaWebhook?.id_do_lead ??
+                respostaWebhook?.ID_do_Lead ??
+                respostaWebhook?.body?.lead_id ??
+                respostaWebhook?.body?.leadId ??
+                respostaWebhook?.body?.id ??
+                "";
+
+
+            if (novoLeadId) {
+
+                leadId =
+                    String(novoLeadId);
+
+
+                sessionStorage.setItem(
+                    "brazilians_lead_id",
+                    leadId
+                );
+
+
+                console.log(
+                    "Lead ID recebido:",
+                    leadId
+                );
+
+            } else {
+
+                console.warn(
+                    "O webhook de Dados Iniciais não devolveu um lead_id."
+                );
+
+            }
+
+
             return response;
 
         }
-
 
         /* =====================================================
            BOTÃO CONTINUAR
@@ -1886,6 +1946,9 @@ document.addEventListener(
             return {
 
                 body: {
+
+                       lead_id:
+                       leadId,
 
                     fullName:
                         document
