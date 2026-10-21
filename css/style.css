@@ -4698,6 +4698,164 @@ body.sessao-modal-open {
     }
 }
 
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    position: relative;
+    width: 100%;
+    padding: 10px 0 24px;
+
+    background: #06090e;
+
+    border-top: 1px solid rgba(255, 255, 255, .06);
+
+    overflow: hidden;
+}
+
+.footer-container {
+    width: min(1000px, calc(100% - 40px));
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* MARCA */
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid rgba(232, 195, 106, .55);
+    border-radius: 5px;
+
+    color: #e8c36a;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    background: rgba(232, 195, 106, .04);
+}
+
+.footer-brand-name {
+    display: flex;
+    flex-direction: column;
+
+    color: #f5f7fa;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+.footer-brand-name small {
+    margin-top: 3px;
+
+    color: #657283;
+
+    font-size: 6px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+
+/* FRASE */
+
+.footer-description {
+    max-width: 500px;
+
+    margin: 16px auto 0;
+
+    color: #737f8e;
+
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+
+/* NAVEGAÇÃO */
+
+.footer-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 28px;
+
+    margin-top: 15px;
+}
+
+.footer-nav a {
+    color: #8a95a3;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+        color .25s ease;
+}
+
+.footer-nav a:hover {
+    color: #e8c36a;
+}
+
+
+/* LINHA */
+
+.footer-line {
+    width: 100%;
+
+    height: 1px;
+
+    margin-top: 10px;
+
+    background: rgba(255, 255, 255, .06);
+}
+
+
+/* COPYRIGHT */
+
+.footer-bottom {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    margin-top: 17px;
+
+    color: #4f5966;
+
+    font-size: 8px;
+    line-height: 1.5;
+}
+
 /* ============================================================
    CORPO INTEIRO — AJUSTE FINAL DE ESPAÇAMENTO E TÍTULOS
    DESKTOP
@@ -7573,6 +7731,46 @@ body.sessao-modal-open {
         width: 100%;
 
         min-width: 0;
+    }
+
+
+  .site-footer {
+        padding: 10px 0 20px;
+    }
+
+    .footer-container {
+        width: calc(100% - 28px);
+    }
+
+    .footer-description {
+        max-width: 320px;
+        font-size: 9px;
+    }
+
+    .footer-nav {
+        flex-wrap: wrap;
+
+        gap: 13px 20px;
+
+        max-width: 330px;
+
+        margin-top: 15px;
+    }
+
+    .footer-nav a {
+        font-size: 9px;
+    }
+
+    .footer-line {
+        margin-top: 10px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        gap: 3px;
+
+        font-size: 9px;
     }
 
 }
