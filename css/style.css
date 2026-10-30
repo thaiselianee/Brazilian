@@ -2013,7 +2013,9 @@ button {
     letter-spacing: 1.65px;
     line-height: 1.5;
 }
-
+.corpo-service-info h3{
+    max-width: 800px !important;
+}
 .corpo-service-info h3,
 .project-info h3 {
     margin: 0;
